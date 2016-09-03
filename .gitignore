@@ -2,6 +2,10 @@
 Thumbs.db
 ehthumbs.db
 
+settings.py
+*.pyc
+*.sqlite3
+
 # Folder config file
 Desktop.ini
 
