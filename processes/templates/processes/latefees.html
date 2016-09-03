@@ -1,0 +1,50 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+
+<div class="container">
+
+<br /><br />
+<b>{{ mode }}</b>
+<br /><br />
+You created {{ total }} late fees during the late fee assessment process.
+<br /><br />
+Start charge num = {{ start }}<br />
+End charge num = {{ end }}
+<br /><br />
+<table class="table">
+    <tr>
+        <th></th>
+        <th>account.account</th>
+        <th>account.invoice_date</th>
+        <th>account.due_date</th>
+        <th>account.product</th>
+        <th>account.price</th>
+        <th>account.charge_num</th>
+        <th>account.type_code</th>
+    </tr>
+{% for account in accounts %}
+    <tr>
+        <td>{{ forloop.counter }}</td>
+        <td>{{ account.account }}</td>
+        <td>{{ account.invoice_date }}</td>
+        <td>{{ account.due_date }}</td>
+        <td>{{ account.product }}</td>
+        <td>{{ account.price }}</td>
+        <td>{{ account.charge_num }}</td>
+        <td>{{ account.type_code }}</td>
+    </tr>
+{% endfor %}
+</table>
+
+<br /><br />
+<center><b>End of Report</b></center>
+<br /><br />
+
+</div>

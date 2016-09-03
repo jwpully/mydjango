@@ -1,0 +1,117 @@
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css" integrity="sha384-fLW2N01lMqjakBkx3l/M9EahuwpSfeNvV63J5ezn3uZzapT0u7EYsXMjQV+0En5r" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+
+<style>
+@media print {
+    footer {page-break-after: always;}
+}
+
+.page {
+	width: 100%;
+	margin: 0; padding: 0;
+	background: none;
+}
+</style>
+
+<div class="container">
+
+{% for customer in customers %}
+
+<!--p><br /></p><p></p-->
+<div class='panel panel-default'>
+  <div class='panel-body'><div class='pull-right'><h2>HOA Dues</h2><br /><b>Statement Date:</b> 
+    {% if statementdate.parameter == None %}
+        {% now "F d, Y" %}
+    {% else %}
+        {{ statementdate.parameter }}
+    {% endif %}
+
+  </div>
+  <div class'pull-left'>
+    <p><b>PCHA</b>
+    <br />P. O. Box 5622
+    <br />Williamsburg, Virginia 23188
+    <br />United States
+    <br />powhatancrossing.org</p>
+    </div>
+    
+  </div>
+</div>
+
+<p><br /></p>
+<div class='panel panel-default'>
+  <div class='panel-body'>
+    <p>{{ customer.account__account_number }}
+    <br />{{ customer.contact_first_name }} {{ customer.contact_last_name }}
+    <br />{{ customer.address_line_1}} 
+    {% if customer.address_line_2 %}
+        <br />{{ customer.address_line_2 }}
+    {% endif %}
+    <!-- address line 2 -->
+    <br />{{ customer.city }}, {{ customer.state}} {{ customer.postal_code }}
+    <br />{{ customer.country }}
+    </p>
+  </div>
+</div>
+
+
+<div class='panel panel-default'>
+  <div class='panel-heading'><h4>PROPERTY</h4></div>
+  <div class='panel-body'>
+    <p><b>Property:</b> {{ customer.account__property__number }} {{ customer.account__property__street }}
+    <br />Section {{ customer.account__property__section }} Lot {{ customer.account__property__lot }}
+    </p>
+  </div>
+</div>
+
+<div class='panel panel-default'>
+  <div class='panel-heading'><h4>ACCOUNT ACTIVITY</h4></div>
+  <div class='panel-body'>
+
+  <div class="container-fluid">
+
+  <div class="row" style="border-bottom:1px solid #ccc;">
+    <div class="col-xs-2" style="padding-right:20px; border-right: 1px solid #ccc;"><b>Inv#</b></div>
+    <div class="col-xs-4" style="padding-right:20px; border-right: 1px solid #ccc;"><b>Description</b></div>
+    <!--div class="col-xs-3" style="padding-right:20px; border-right: 1px solid #ccc;"><b>Invoice Date</b></div-->
+    <div class="col-xs-3" style="padding-right:20px; border-right: 1px solid #ccc;"><b>Due Date</b></div>
+    <div class="col-xs-2" style="padding-right:20px; border-right: 1px solid #ccc;"><b>Amount</b></div>
+    <div class="col-xs-1"><b>Status</b></div>
+  </div>
+
+ {% for charge in customer.charges %} 
+
+  <div class="row" style="border-bottom:1px solid #ccc;">
+    <div class="col-xs-2" style="padding-right:20px; border-right: 1px solid #ccc;">{{ charge.charge_num }}</div>
+    <div class="col-xs-4" style="padding-right:20px; border-right: 1px solid #ccc;">{{ charge.product }}</div>
+    <!--div class="col-xs-3" style="padding-right:20px; border-right: 1px solid #ccc;">{#{ charge.invoice_date }#}</div-->
+    <div class="col-xs-3" style="padding-right:20px; border-right: 1px solid #ccc;">{{ charge.due_date }}</div>
+    <div class="col-xs-2" style="padding-right:20px; border-right: 1px solid #ccc;">{{ charge.amount }}</div>
+    <div class="col-xs-1">{{ charge.paid_status }}</div>
+  </div>
+
+{% endfor %}
+
+  </div>
+
+<br />
+{% autoescape off %}
+{{ customer.payments }}
+{% endautoescape %}
+</div>
+
+</div>
+
+{{ note.parameter }}
+
+<footer></footer>
+
+{% endfor %}
+
+</div>
