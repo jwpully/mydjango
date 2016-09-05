@@ -28,6 +28,7 @@ class Alteration(models.Model):
     other = models.BooleanField(blank=True)
     structureother = models.TextField(blank=True, null=True)
     builder = models.CharField(max_length=32, blank=True, null=True, choices=Builder)
+    contractor = models.CharField(max_length=128, blank=True, null=True)
     description = models.TextField(blank=False, null=False)
     size = models.CharField(max_length=64, blank=True, null=True)
     roof = models.CharField(max_length=64, blank=True, null=True)

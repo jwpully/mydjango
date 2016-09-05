@@ -6,7 +6,7 @@ from alterations.models import Alteration
 class AlterationsInline(admin.StackedInline):
     fields = [('property', 'account', 'status', 'email'), ('fence', 'shed', 'pool', 'room', 'driveway', 'garage', 'deck', 'other') \
         , ('structureother')
-        , ('builder', 'buildername'), ('size', 'roof', 'cost', 'completion')
+        , ('builder', 'contractor'), ('size', 'roof', 'cost', 'completion')
         , ('description')
         , ('file1', 'file2', 'file3')
         , ('requested', 'finalized', 'processed'), ('notes'), ('waiver'), ('reason', 'special_instructions')]
